@@ -53,13 +53,13 @@ class Login extends Component {
       <div data-testid="page-login">
         <h1> Estamos na page Login </h1>
         <label htmlFor="login">
-          Nome:
           <input
             value={ name }
             onChange={ this.onInputChange }
             data-testid="login-name-input"
             name="name"
             type="text"
+            placeholder="Digite seu nome..."
           />
           <button
             disabled={ buttonDisabled }
