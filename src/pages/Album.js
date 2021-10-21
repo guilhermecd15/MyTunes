@@ -52,7 +52,7 @@ class Album extends Component {
         <Header />
         { loadingSongs ? <Loading /> : albumClicked }
         { songs.length && songs.slice(1).map((song) => (<MusicCard
-          key={ song.id }
+          key={ song.trackId }
           song={ song }
         />)) }
       </div>

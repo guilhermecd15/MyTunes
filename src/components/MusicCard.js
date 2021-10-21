@@ -65,13 +65,13 @@ class MusicCard extends Component {
           <code>audio</code>
           .
         </audio>
-        <label htmlFor="favorita">
+        <label htmlFor={ trackId }>
           <input
             type="checkbox"
             data-testid={ `checkbox-music-${trackId}` }
-            onClick={ this.checked }
+            onChange={ this.checked }
             checked={ favoriteChecked }
-            id="favorita"
+            id={ trackId }
           />
           Favorita
         </label>
