@@ -50,22 +50,24 @@ class Login extends Component {
       );
     }
     return (
-      <div data-testid="page-login">
-        <h1> Estamos na page Login </h1>
-        <label htmlFor="login">
+      <div data-testid="page-login" className="page-login">
+        <h1> Bem vindo ao Mytunes </h1>
+        <label htmlFor="login" className="search-label">
           <input
             value={ name }
             onChange={ this.onInputChange }
             data-testid="login-name-input"
             name="name"
             type="text"
-            placeholder="Digite seu nome..."
+            placeholder="  Digite seu nome..."
+            className="search-input"
           />
           <button
             disabled={ buttonDisabled }
             data-testid="login-submit-button"
             type="button"
             onClick={ this.logar }
+            className="search-button"
           >
             Entrar
           </button>

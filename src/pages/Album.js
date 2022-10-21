@@ -41,20 +41,22 @@ class Album extends Component {
       songs,
     } = this.state;
     const albumClicked = (
-      <div>
+      <div className="album-card">
         <img src={ artworkUrl100 } alt={ collectionName } />
-        <h3 data-testid="album-name">{ collectionName }</h3>
-        <h4 data-testid="artist-name">{ artistName }</h4>
+        <div>
+          <h3 data-testid="album-name">{collectionName}</h3>
+          <h4 data-testid="artist-name">{artistName}</h4>
+        </div>
       </div>
     );
     return (
       <div data-testid="page-album">
         <Header />
-        { loadingSongs ? <Loading /> : albumClicked }
-        { songs.length && songs.slice(1).map((song) => (<MusicCard
+        {loadingSongs ? <Loading /> : albumClicked}
+        {songs.length && songs.slice(1).map((song) => (<MusicCard
           key={ song.trackId }
           song={ song }
-        />)) }
+        />))}
       </div>
     );
   }

@@ -13,16 +13,19 @@ class AlbumCard extends Component {
       },
     } = this.props;
     return (
-      <div>
+      <div className="album-card">
         <img src={ artworkUrl100 } alt={ collectionName } />
-        <p>{ collectionName }</p>
-        <p>{ artistName }</p>
-        <Link
-          to={ `/album/${collectionId}` }
-          data-testid={ `link-to-album-${collectionId}` }
-        >
-          Mais informações
-        </Link>
+        <div>
+          <p className="album-name">{collectionName}</p>
+          <p>{artistName}</p>
+          <Link
+            to={ `/album/${collectionId}` }
+            data-testid={ `link-to-album-${collectionId}` }
+            className="album-link"
+          >
+            Mais informações
+          </Link>
+        </div>
       </div>
     );
   }

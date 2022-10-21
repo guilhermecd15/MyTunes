@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AlbumCard from '../components/AlbumCard';
 import Header from '../components/Header';
-import Loading from '../components/Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 
 class Search extends Component {
@@ -11,7 +10,6 @@ class Search extends Component {
     this.state = {
       nameArtist: '',
       buttonSearchDisabled: true,
-      loadingAlbum: false,
       promiseAlbumLoaded: false,
       albuns: [],
       noAlbum: false,
@@ -29,7 +27,6 @@ class Search extends Component {
 
   search = async () => {
     const { nameArtist } = this.state;
-    this.setState({ loadingAlbum: true });
     const fetchAlbuns = await searchAlbumsAPI(nameArtist);
     this.setState({
       aux: nameArtist,
@@ -37,7 +34,6 @@ class Search extends Component {
       promiseAlbumLoaded: true,
       buttonSearchDisabled: true,
       albuns: [...fetchAlbuns],
-      loadingAlbum: false,
       resultdisabled: true,
     });
     if (!fetchAlbuns.length) {
@@ -59,7 +55,6 @@ class Search extends Component {
   render() {
     const {
       buttonSearchDisabled,
-      loadingAlbum,
       promiseAlbumLoaded,
       albuns,
       noAlbum,
@@ -68,49 +63,47 @@ class Search extends Component {
       nameArtist,
     } = this.state;
     const result = (
-      <h3>
+      <h3 className="search-label">
         Resultado de álbuns de:
         {' '}
-        { aux }
+        {aux}
       </h3>
     );
     return (
       <div>
         <Header />
-        <div data-testid="page-search">
-          <h1> Estamos na page Search </h1>
-          <form>
-            <label htmlFor="search-artist-label">
-              <input
-                type="text"
-                placeholder="Digite o nome do artista..."
-                data-testid="search-artist-input"
-                onChange={ this.onInputChange }
-                name="nameArtist"
-                value={ nameArtist }
-              />
-              <button
-                type="button"
-                data-testid="search-artist-button"
-                disabled={ buttonSearchDisabled }
-                onClick={ this.search }
-              >
-                Pesquisar
-              </button>
-            </label>
-          </form>
+        <div data-testid="page-search" className="page-search">
+          <label htmlFor="search-artist-label" className="search-label">
+            <input
+              type="text"
+              placeholder="  Digite o nome do album..."
+              data-testid="search-artist-input"
+              onChange={ this.onInputChange }
+              name="nameArtist"
+              value={ nameArtist }
+              className="search-input"
+            />
+            <button
+              type="button"
+              data-testid="search-artist-button"
+              disabled={ buttonSearchDisabled }
+              onClick={ this.search }
+              className="search-button"
+            >
+              Pesquisar
+            </button>
+          </label>
         </div>
-        { resultdisabled && result }
-        { loadingAlbum && <Loading /> }
-        { promiseAlbumLoaded && (
-          <div>
-            { noAlbum ? <h3> Nenhum álbum foi encontrado</h3> : ' '}
-            { albuns.map((album) => (<AlbumCard
+        {resultdisabled && result}
+        {promiseAlbumLoaded && (
+          <div className="cards">
+            {noAlbum ? <h3> Nenhum álbum foi encontrado</h3> : ' '}
+            {albuns.map((album) => (<AlbumCard
               key={ album.collectionId }
               album={ album }
             />))}
           </div>
-        ) }
+        )}
       </div>
     );
   }
